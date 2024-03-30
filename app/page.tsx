@@ -1,9 +1,10 @@
+import client from "@/app/db/index";
 import axios from "axios";
 import Link from "next/link";
 
 async function getUserDetails() {
-  const response = await axios.get("http://localhost:3000/api/user");
-  return response.data;
+  const response = await client.user.findFirst();
+  return response;
 }
 
 export default async function Home() {
@@ -13,8 +14,8 @@ export default async function Home() {
       Home Page
       <Link href="/dashboard">Dashboard</Link>
       <div>
-        {user?.name}
-        {user?.email}
+        {user?.username}
+        {user?.password}
       </div>
     </>
   );
