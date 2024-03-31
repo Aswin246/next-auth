@@ -1,22 +1,16 @@
+"use client";
 import client from "@/app/db/index";
 import axios from "axios";
 import Link from "next/link";
+import { signIn, signOut } from "next-auth/react";
+import Appbar from "./components/Appbar";
 
-async function getUserDetails() {
-  const response = await client.user.findFirst();
-  return response;
-}
+import { useSession } from "next-auth/react";
 
-export default async function Home() {
-  const user = await getUserDetails();
+export default function Home() {
   return (
     <>
-      Home Page
-      <Link href="/dashboard">Dashboard</Link>
-      <div>
-        {user?.username}
-        {user?.password}
-      </div>
+      <Appbar />
     </>
   );
 }
